@@ -5,9 +5,11 @@
  */
 package cruddelta;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -65,16 +67,16 @@ public class UserFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        input_fullname = new javax.swing.JTextField();
+        input_userID = new javax.swing.JTextField();
+        input_email = new javax.swing.JTextField();
+        input_phone = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        input_address = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -87,23 +89,23 @@ public class UserFrame extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Simple CRUD Application");
+        jLabel1.setText("CRUD APPLICATION");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(82, 82, 82)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -120,11 +122,28 @@ public class UserFrame extends javax.swing.JFrame {
 
         jLabel6.setText("Phone Number");
 
+        input_userID.setEnabled(false);
+
         jButton1.setText("New");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Exit");
 
@@ -162,11 +181,11 @@ public class UserFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel7)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField4))))
+                            .addComponent(input_address)
+                            .addComponent(input_email)
+                            .addComponent(input_fullname)
+                            .addComponent(input_userID)
+                            .addComponent(input_phone))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -176,23 +195,23 @@ public class UserFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_userID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(input_email, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_address, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -216,6 +235,11 @@ public class UserFrame extends javax.swing.JFrame {
                 "ID", "Full Name", "Email Address", "Phone Number", "Address"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -258,6 +282,133 @@ public class UserFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        database = false;
+        conn = DBConnection.ConnectDB();
+        String sql = "SELECT * FROM users WHERE id=?";
+        
+        try{
+            stmt = conn.prepareStatement(sql);
+            int row = jTable1.getSelectedRow();
+            
+            String table_clicked = jTable1.getModel().getValueAt(row, 0).toString();
+            stmt.setString(1, table_clicked);
+            rs = stmt.executeQuery();
+
+            if(rs.next()){
+                input_userID.setText(rs.getString("id"));
+                input_fullname.setText(rs.getString("fullname"));
+                input_email.setText(rs.getString("email"));
+                input_phone.setText(rs.getString("phone"));
+                input_address.setText(rs.getString("address"));
+            }
+            
+        }catch(Exception ex){
+            
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        conn = DBConnection.ConnectDB();
+        
+        if(database){
+            String sql = "INSERT INTO users (fullname, email, phone, address) VALUES(?,?,?,?)";
+            String fullname = input_fullname.getText().toString();
+            String email = input_email.getText().toString();
+            String phone = input_phone.getText().toString();
+            String address = input_address.getText().toString();
+            
+            
+            try{
+                stmt = conn.prepareStatement(sql);
+                
+                stmt.setString(1, fullname);
+                stmt.setString(2, email);
+                stmt.setString(3, phone);
+                stmt.setString(4, address);
+                
+                int count = stmt.executeUpdate();
+                if(count > 0){
+                    JOptionPane.showMessageDialog(null, "Successfully Created.");
+                }
+                
+            }catch(SQLException | HeadlessException ex){
+                
+                    JOptionPane.showMessageDialog(null, "Error Occurs.");
+            }
+        }else{
+            
+            String sql = "Update users set fullname=?, email=?, phone=?, address=? where id=?";
+            String fullname = input_fullname.getText().toString();
+            String email = input_email.getText().toString();
+            String phone = input_phone.getText().toString();
+            String address = input_address.getText().toString();
+            int id = Integer.parseInt(input_userID.getText());
+            
+            
+            try{
+                stmt = conn.prepareStatement(sql);
+                
+                stmt.setString(1, fullname);
+                stmt.setString(2, email);
+                stmt.setString(3, phone);
+                stmt.setString(4, address);
+                stmt.setInt(5, id);
+                
+                int count = stmt.executeUpdate();
+                if(count > 0){
+                    JOptionPane.showMessageDialog(null, "Successfully Updated.");
+                }
+                
+            }catch(SQLException | HeadlessException ex){
+                
+                    JOptionPane.showMessageDialog(null, "Error Occurs.");
+            }
+            
+        }
+        
+        getData();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        database = true;
+        input_userID.setText("");
+        input_fullname.setText("");
+        input_email.setText("");
+        input_phone.setText("");
+        input_address.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        conn = DBConnection.ConnectDB();
+        String sql = "DELETE FROM users WHERE id=?";
+        try{
+            
+            int id = Integer.parseInt(input_userID.getText());
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "Successfully Deleted.");
+            
+            database = true;
+            input_userID.setText("");
+            input_fullname.setText("");
+            input_email.setText("");
+            input_phone.setText("");
+            input_address.setText("");
+            
+            
+        }catch(SQLException | HeadlessException ex){
+            JOptionPane.showMessageDialog(null, "Error Occurs...");
+        }
+        
+        getData();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,6 +445,11 @@ public class UserFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField input_address;
+    private javax.swing.JTextField input_email;
+    private javax.swing.JTextField input_fullname;
+    private javax.swing.JTextField input_phone;
+    private javax.swing.JTextField input_userID;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -312,10 +468,5 @@ public class UserFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
